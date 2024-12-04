@@ -1,0 +1,36 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww20440\viewh11400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs32 \cf0 Google Maps API Key\
+\
+AIzaSyAAZpiX72jxRTsrZdCKU50S3M6fNMUVucc\
+\
+\
+<div id="map"></div>\
+\
+  <script>\
+    function initMap() \{\
+      const map = new google.maps.Map(document.getElementById("map"), \{\
+        zoom: 14,\
+        center: \{ lat: 40.862244, lng: -74.198863 \}, // Initial center of the map\
+      \});\
+\
+      fetch('shuttle_positions.php')\
+        .then(response => response.json())\
+        .then(shuttlePositions => \{\
+          shuttlePositions.forEach(position => \{\
+            const shuttleMarker = new google.maps.Marker(\{\
+              position: new google.maps.LatLng(position.latitude, position.longitude),\
+              map: map,\
+              title: `Shuttle $\{position.shuttle_id\}`,\
+            \});\
+          \});\
+        \})\
+        .catch(error => console.error('Error fetching shuttle positions:', error));\
+    \}\
+  </script>\
+  <script src="https://maps.googleapis.com/maps/api/js?key= AIzaSyAAZpiX72jxRTsrZdCKU50S3M6fNMUVucc&callback=initMap" async defer></script>}
